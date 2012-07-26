@@ -1,0 +1,29 @@
+<VirtualHost *:9000>
+    ServerName <%= @app[:dns_prefix] %>.<%= @app[:domain] %>:9000
+    ServerAdmin toranb@gmail.com
+    DocumentRoot <%= @app[:parent_path] %><%= @app[:path] %><%= @app[:media_dir] %>
+
+	Alias /static/ <%= @app[:parent_path] %><%= @app[:path] %><%= @app[:media_dir] %>/
+    <Directory <%= @app[:parent_path] %><%= @app[:path] %><%= @app[:media_dir] %>/ >
+        Options FollowSymLinks MultiViews ExecCGI
+        AllowOverride None
+        Order allow,deny
+        allow from all
+    </Directory>
+
+    Alias /assets/ <%= @app[:parent_path] %><%= @app[:path] %><%= @app[:static_dir] %>/
+    <Directory <%= @app[:parent_path] %><%= @app[:path] %><%= @app[:static_dir] %>/ >
+        Options FollowSymLinks MultiViews ExecCGI
+        AllowOverride None
+        Order allow,deny
+        allow from all
+    </Directory>
+    
+    WSGIScriptAlias / <%= @app[:parent_path] %><%= @app[:path] %><%= @app[:wsgi_script] %>
+    LogLevel warn
+
+    WSGIDaemonProcess <%= @app[:name] %> processes=2 threads=15 display-name=%{GROUP} python-path=<%= @app[:parent_path] %><%= @app[:path] %>virtualenv/lib/python2.7/site-packages:<%= @app[:parent_path] %><%= @app[:path] %>src
+    WSGIProcessGroup <%= @app[:name] %>
+    ErrorLog <%= @app[:parent_path] %><%= @app[:logs_dir] %>/<%= @app[:name] %>-error.log
+    CustomLog <%= @app[:parent_path] %><%= @app[:logs_dir] %>/<%= @app[:name] %>-combined.log combined
+</VirtualHost>

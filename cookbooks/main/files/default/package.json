@@ -1,0 +1,10 @@
+{
+     "name": "express_and_apache",
+     "description": "express hosted node http proxy that forwards to apache and socket.io",
+     "version": "0.0.1",
+     "dependencies": {
+        "express": "",
+        "http-proxy": "",
+        "socket.io": ""
+     }
+}

@@ -1,0 +1,77 @@
+{
+    "run_list": [
+        "main",
+        "main::users",
+        "main::ssh-keys",
+	"main::mysql-client",
+	"main::mysql",
+        "main::apache",
+        "main::logrotate",
+        "main::openssh-server",
+        "main::node",
+        "main::express",
+        "main::base-wsgi"
+    ],
+    "base_packages": [
+        "memcached",
+	"unzip",
+        "build-essential",
+        "python-setuptools",
+        "python-dev"
+    ],
+    "easy_install_packages": [
+        "pip"
+    ],
+    "pip_packages": [
+        "virtualenv"
+    ],
+    "ssh_port": "6599",
+    "users": {
+        "toranb": {
+            "password":"????",
+            "groups": ["www-data"],
+            "home":"/root/toranb/",
+            "public_key":"id_rsa.pub",
+            "private_key":"id_rsa"
+        }
+    },
+    "node_apps":[
+        {
+            "name":"toranb",
+            "host":"www.toranb.com"
+        },
+        {
+            "name":"epic",
+            "host":"www.epicsoftwaredevelopment.com"
+        }
+     ],
+    "wsgi_apps": [
+        {
+            "parent_path":"/www/blog.toranbillups.com/",
+            "path":"current/",
+            "name":"blog",
+            "dns_prefix":"www",
+            "domain":"toranbillups.com",
+            "media_dir":"static",
+            "static_dir":"assets",
+            "wsgi_script":"src/live.wsgi",
+            "logs_dir":"logs",
+            "owner":"toranb"
+        }
+    ],
+    "mysql": {
+        "rootpw":"????",
+        "clients": {
+            "blog": {
+                "remote_ip":"192.168.0.19",
+                "remote_user":"blog",
+                "remote_userpw":"????"            
+            },
+            "other": {
+                "remote_ip":"192.168.0.19",
+                "remote_user":"other",
+                "remote_userpw":"????"            
+            }
+        }
+    }
+}

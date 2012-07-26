@@ -1,0 +1,65 @@
+ServerRoot "/etc/apache2"
+ServerName 127.0.1.1
+LockFile /var/lock/apache2/accept.lock
+PidFile /var/run/apache2.pid
+Timeout 300
+KeepAlive On
+MaxKeepAliveRequests 100
+KeepAliveTimeout 15
+
+Include /etc/apache2/mods-enabled/*.load
+Include /etc/apache2/mods-enabled/*.conf
+
+NameVirtualHost *:9000
+Listen 9000
+
+<IfModule mpm_prefork_module>
+    StartServers          5
+    MinSpareServers       5
+    MaxSpareServers      10
+    MaxClients          150
+    MaxRequestsPerChild   0
+</IfModule>
+
+<IfModule mpm_worker_module>
+    StartServers          2
+    MinSpareThreads      25
+    MaxSpareThreads      75
+    ThreadLimit          64
+    ThreadsPerChild      25
+    MaxClients          150
+    MaxRequestsPerChild   0
+</IfModule>
+
+<IfModule mpm_event_module>
+    StartServers          2
+    MaxClients          150
+    MinSpareThreads      25
+    MaxSpareThreads      75
+    ThreadLimit          64
+    ThreadsPerChild      25
+    MaxRequestsPerChild   0
+</IfModule>
+
+User www-data
+Group www-data
+
+DefaultType text/plain
+HostnameLookups Off
+ErrorLog /var/log/apache2/error.log
+LogLevel warn
+
+LogFormat "%v:%p %h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" vhost_combined
+LogFormat "%h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" combined
+LogFormat "%h %l %u %t \"%r\" %>s %O" common
+LogFormat "%{Referer}i -> %U" referer
+LogFormat "%{User-agent}i" agent
+CustomLog /var/log/apache2/other_vhosts_access.log vhost_combined
+
+WSGIApplicationGroup %{GLOBAL}
+WSGIPythonHome <%= @baseline_virtualenv %>
+
+ServerTokens Prod
+ServerSignature Off
+
+Include /etc/apache2/sites-enabled/

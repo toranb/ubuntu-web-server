@@ -1,0 +1,19 @@
+This install was written for Ubuntu 12.04 and works best on a fresh install
+
+If you haven't already you need to install git locally and pull down this project
+    1.) sudo apt-get install git-core -y
+    2.) git clone https://github.com/toranb/ubuntu-web-server.git chef
+
+Please modify the following in configuration.json before you kick off the installer
+    1.) modify the username/password/home for anyone listed in the users section of the config 
+    2.) modify the node apps to reflect the socket.io apps you want installed with express
+    3.) modify the wsgi apps to reflect the python wsgi apps you want installed with apache
+    4.) modify the msyql configuration to reflect ip/username/password
+
+To generate passwords for the user section of the configuration 
+
+    openssl passwd -1 "theplaintextpassword"
+    More information can be found @ http://wiki.opscode.com/display/chef/Resources
+
+To run the chef script and setup your express and apache web server:
+    sudo ./install.sh configuration.json
