@@ -1,0 +1,23 @@
+var express = require('express');
+var fs = require('fs');
+var http = require('http');
+
+var DEBUG = false;
+var access = fs.createWriteStream(__dirname+'/access.log', {flags: 'a+', encoding: 'utf8', node: 0666});
+
+var app = express();
+var server = http.createServer(app);
+
+app.configure(function(){
+  app.use(express.logger({stream: access, format: 'default'}));
+});
+
+app.configure('production', function(){
+  app.use(express.errorHandler());
+});
+
+app.get('/', function(req, res) {
+  res.send('<%= @name %>');
+});
+
+exports.<%= @name %> = server;

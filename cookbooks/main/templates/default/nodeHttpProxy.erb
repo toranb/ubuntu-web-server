@@ -1,4 +1,5 @@
 var httpProxy = require('http-proxy');
+var http = require('http');
 var express = require('express');
 
 httpProxy.createServer(function (req, res, proxy) {
@@ -17,16 +18,12 @@ httpProxy.createServer(function (req, res, proxy) {
     proxy.proxyRequest(req, res, {host: 'localhost', port: port});
 }).listen(8000);
 
-var server = express.createServer();
+var app = express();
+var server = http.createServer(app);
 
 <% @node_apps.each do |website| -%>
-var <%= website[:name] %> = express.createServer();
-<%= website[:name] %>.get('/', function (req, res) {
-    res.send('<%= website[:name] %>');
-});
-
-io = require('socket.io').listen(<%= website[:name] %>);
-server.use(express.vhost('<%= website[:host] %>', <%= website[:name] %>));
+var <%= website[:name] %> = require('./<%= website[:name] %>/app.js').<%= website[:name] %>
+app.use(express.vhost('<%= website[:host] %>', <%= website[:name] %>));
 <% end -%>
 
 server.listen(8080);
