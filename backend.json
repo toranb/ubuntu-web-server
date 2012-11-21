@@ -1,0 +1,25 @@
+{
+    "run_list": [
+	"main::mysql",
+        "main::openssh-server"
+    ],
+    "base_packages": [
+        "cassandra"
+    ],
+    "ssh_port": "6599",
+    "mysql": {
+        "rootpw":"????",
+        "clients": {
+            "blog": {
+                "remote_ip":"192.168.0.32",
+                "remote_user":"blog",
+                "remote_userpw":"????"            
+            },
+            "other": {
+                "remote_ip":"192.168.0.32",
+                "remote_user":"other",
+                "remote_userpw":"????"            
+            }
+        }
+    }
+}
