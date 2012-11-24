@@ -1,10 +1,8 @@
 {
     "run_list": [
 	"main::mysql",
-        "main::openssh-server"
-    ],
-    "base_packages": [
-        "cassandra"
+        "main::openssh-server",
+        "main::cassandra"
     ],
     "ssh_port": "6599",
     "mysql": {
