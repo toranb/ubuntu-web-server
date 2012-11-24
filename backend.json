@@ -4,7 +4,7 @@
         "main::openssh-server",
         "main::cassandra"
     ],
-    "ssh_port": "6599",
+    "ssh_port": "7599",
     "mysql": {
         "rootpw":"????",
         "clients": {
