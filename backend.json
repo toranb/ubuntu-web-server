@@ -9,12 +9,12 @@
         "rootpw":"????",
         "clients": {
             "blog": {
-                "remote_ip":"192.168.0.32",
+                "remote_ip":"192.168.0.19",
                 "remote_user":"blog",
                 "remote_userpw":"????"            
             },
             "other": {
-                "remote_ip":"192.168.0.32",
+                "remote_ip":"192.168.0.19",
                 "remote_user":"other",
                 "remote_userpw":"????"            
             }
