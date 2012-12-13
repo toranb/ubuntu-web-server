@@ -4,7 +4,6 @@
         "main::users",
         "main::ssh-keys",
 	"main::mysql-client",
-	"main::mysql",
         "main::apache",
         "main::logrotate",
         "main::openssh-server",
@@ -58,20 +57,5 @@
             "logs_dir":"logs",
             "owner":"toranb"
         }
-    ],
-    "mysql": {
-        "rootpw":"????",
-        "clients": {
-            "blog": {
-                "remote_ip":"192.168.0.19",
-                "remote_user":"blog",
-                "remote_userpw":"????"            
-            },
-            "other": {
-                "remote_ip":"192.168.0.19",
-                "remote_user":"other",
-                "remote_userpw":"????"            
-            }
-        }
-    }
+    ]
 }
