@@ -68,6 +68,18 @@
             "wsgi_script":"yoga/live.wsgi",
             "logs_dir":"logs",
             "owner":"toranb"
+        },
+        {
+            "parent_path":"/www/scheduler.schedule-matic.com/",
+            "path":"current/",
+            "name":"schedule-matic",
+            "dns_prefix":"www",
+            "domain":"schedule-matic.com",
+            "media_dir":"static",
+            "static_dir":"assets",
+            "wsgi_script":"scheduler/live.wsgi",
+            "logs_dir":"logs",
+            "owner":"toranb"
         }
     ]
 }
