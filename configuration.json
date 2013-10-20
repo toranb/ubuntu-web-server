@@ -56,6 +56,18 @@
             "wsgi_script":"src/live.wsgi",
             "logs_dir":"logs",
             "owner":"toranb"
+        },
+        {
+            "parent_path":"/www/shelene.yogawithshelene.com/",
+            "path":"current/",
+            "name":"shelene",
+            "dns_prefix":"www",
+            "domain":"yogawithshelene.com",
+            "media_dir":"static",
+            "static_dir":"assets",
+            "wsgi_script":"yoga/live.wsgi",
+            "logs_dir":"logs",
+            "owner":"toranb"
         }
     ]
 }
